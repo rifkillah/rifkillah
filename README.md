@@ -4,7 +4,7 @@
 <!--                     HERO HEADER                           -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 
-<img src="https://capsule-render.vercel.app/api?type=venom&color=0:0a0a0f,30:0d1b2a,60:1a1a3e,100:0d1117&height=280&section=header&text=Rifkillah%20Muliya&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=42&desc=%E2%96%B8%20Al-Faris%20%E2%80%94%20Designer%20%C3%97%20Developer%20%C3%97%20Creator%20%E2%97%82&descAlignY=60&descSize=18&descColor=00d4ff&stroke=00d4ff&strokeWidth=1" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=venom&color=0:0a0a0f,30:0d1b2a,60:1a1a3e,100:0d1117&height=280&section=header&text=Rifkillah%20Muliya%20Al-faris&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=42&desc=%E2%96%B8%20Al-Faris%20%E2%80%94%20Designer%20%C3%97%20Developer%20%C3%97%20Creator%20%E2%97%82&descAlignY=60&descSize=18&descColor=00d4ff&stroke=00d4ff&strokeWidth=1" width="100%"/>
 
 <!-- TYPING ANIMATION -->
 <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=20&duration=2800&pause=1200&color=00D4FF&center=true&vCenter=true&repeat=true&width=600&height=60&lines=🎨+UI%2FUX+Designer+%26+Visual+Thinker;📱+Android+Custom+ROM+Engineer;🎬+Multimedia+Creator+%26+Filmmaker;💻+Informatika+%40+Universitas+Pamulang;⚡+Tech+Explorer+Since+Age+6" alt="Typing SVG"/>
