@@ -247,8 +247,6 @@ fun_fact   : Masih SD udah juara 1 rangkaian elektronik! ⚡
   <img alt="github-snake" src="https://raw.githubusercontent.com/rifkillah/rifkillah/output/github-contribution-grid-snake-dark.svg" width="100%"/>
 </picture>
 
-> ⚠️ *Untuk mengaktifkan snake animation, tambahkan GitHub Action dari* [platane/snk](https://github.com/platane/snk)
-
 </div>
 
 ---
