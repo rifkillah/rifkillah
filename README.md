@@ -11,7 +11,7 @@
 
 <!-- TYPING SVG ANIMATION -->
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=00D4FF&center=true&vCenter=true&multiline=false&repeat=true&width=700&height=55&lines=🚀+Halo!+Aku+Rifki+—+Selamat+datang!;🎨+UI%2FUX+Designer+%26+Multimedia+Creator;📱+Android+Custom+ROM+Enthusiast;💻+Web+%26+App+Developer+in+Progress;📷+Photographer+%26+Short+Film+Maker;🌱+Informatika+Universitas+Pamulang+2023;⚡+Tech+Explorer+Since+Age+6!" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=00D4FF&center=true&vCenter=true&multiline=false&repeat=true&width=700&height=55&lines=%F0%9F%9A%80%20Halo!%20Aku%20Rifki%20-%20Selamat%20datang!%3B%F0%9F%8E%A8%20UI%2FUX%20Designer%20%26%20Multimedia%20Creator%3B%F0%9F%93%B1%20Android%20Custom%20ROM%20Enthusiast%3B%F0%9F%92%BB%20Web%20%26%20App%20Developer%20in%20Progress%3B%F0%9F%93%B7%20Photographer%20%26%20Short%20Film%20Maker%3B%F0%9F%8C%B1%20Informatika%20Universitas%20Pamulang%202023%3B%E2%9A%A1%20Tech%20Explorer%20Since%20Age%206!" alt="Typing SVG" />
 </a>
 
 </div>
