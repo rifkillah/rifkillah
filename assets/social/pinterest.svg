@@ -67,25 +67,64 @@
 <radialGradient id="socGlow" cx=".5" cy=".5" r=".5">
   <stop offset="0" stop-color="#F43F5E" stop-opacity=".30"/>
   <stop offset="1" stop-color="#F43F5E" stop-opacity="0"/>
-</radialGradient></defs><style>
-.fl-a{animation:flA 9s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
-.fl-b{animation:flB 11s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
-.fl-c{animation:flC 13s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
-.orbit{animation:spinSlow 46s linear infinite;transform-box:fill-box;transform-origin:center}
-.orbit-rev{animation:spinSlow 64s linear infinite reverse;transform-box:fill-box;transform-origin:center}
-.dotpulse{animation:dotPulse 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+</radialGradient>
+<clipPath id="socClip"><rect width="144" height="52" rx="14"/></clipPath></defs><style>
+/* ------------------------------------------------------------------
+   Motion system
+   · one easing for everything: cubic-bezier(.22,.61,.36,1) (ease-out)
+   · entrances finish within .85s and move at most 11px
+   · ambient loops run at least 7s, amplitude under 15px
+   · nothing bounces, spins fast, or changes hue
+   ------------------------------------------------------------------ */
+.fc{transform-box:fill-box;transform-origin:center}
+.fl-a{animation:flA 11s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.fl-b{animation:flB 13s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.fl-c{animation:flC 15s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.orbit{animation:spinSlow 60s linear infinite;transform-box:fill-box;transform-origin:center}
+.orbit-rev{animation:spinSlow 84s linear infinite reverse;transform-box:fill-box;transform-origin:center}
+.dotpulse{animation:dotPulse 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
 .rot{opacity:0;animation:rot 13s cubic-bezier(.42,0,.2,1) infinite}
-.mq{animation:mq 30s linear infinite;transform-box:fill-box}
-.mq-rev{animation:mqRev 36s linear infinite;transform-box:fill-box}
-.breath{animation:breath 6s ease-in-out infinite}
-@keyframes flA{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-@keyframes flB{0%,100%{transform:translateY(0)}50%{transform:translateY(13px)}}
-@keyframes flC{0%,100%{transform:translate(0,0)}50%{transform:translate(9px,-11px)}}
+.rot0{opacity:1}
+.mq{animation:mq 46s linear infinite;transform-box:fill-box}
+.mq-rev{animation:mqRev 58s linear infinite;transform-box:fill-box}
+.breath{animation:breath 7.5s ease-in-out infinite}
+.aur{animation:aur 28s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.halo{animation:halo 8.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.bob{animation:bob 7.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.glowp{animation:glowP 8s ease-in-out infinite}
+.shine{animation:shine 9s ease-in-out infinite}
+.tilt{animation:tilt 14s ease-in-out infinite}
+.grow{transform-box:fill-box;transform-origin:left center;animation:grow .95s cubic-bezier(.22,.61,.36,1) both}
+.pop{opacity:0;transform-box:fill-box;transform-origin:center;animation:pop .55s cubic-bezier(.22,.61,.36,1) both}
+.rv{opacity:0;animation:rv .75s cubic-bezier(.22,.61,.36,1) both}
+.rv-s{opacity:0;animation:rvS .85s cubic-bezier(.22,.61,.36,1) both}
+
+@keyframes flA{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes flB{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
+@keyframes flC{0%,100%{transform:translate(0,0)}50%{transform:translate(8px,-10px)}}
 @keyframes spinSlow{to{transform:rotate(360deg)}}
-@keyframes dotPulse{0%,100%{opacity:.35;transform:scale(.82)}50%{opacity:1;transform:scale(1.18)}}
-@keyframes rot{0%{opacity:0}3%{opacity:1}21%{opacity:1}24%{opacity:0}100%{opacity:0}}
+@keyframes dotPulse{0%,100%{opacity:.34;transform:scale(.84)}50%{opacity:1;transform:scale(1.14)}}
+@keyframes rot{0%{opacity:0;transform:translateY(7px)}3%{opacity:1;transform:translateY(0)}21%{opacity:1}24%{opacity:0}100%{opacity:0}}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes mqRev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-@keyframes breath{0%,100%{opacity:.42}50%{opacity:.85}}
-@media (prefers-reduced-motion:reduce){.fl-a,.fl-b,.fl-c,.orbit,.orbit-rev,.dotpulse,.rot,.mq,.mq-rev,.breath{animation:none!important}}
-</style><rect width="144" height="52" rx="14" fill="url(#socBg)"/><circle cx="128" cy="6" r="38" fill="url(#socGlow)"/><rect x=".5" y=".5" width="143" height="51" rx="14" fill="none" stroke="url(#rim)" stroke-width="1"/><path d="M 14 1.5 H 130" stroke="url(#topLine)" stroke-width="1" opacity=".5"/><rect x="8" y="13" width="26" height="26" rx="8" fill="#F43F5E" fill-opacity=".10" stroke="#F43F5E" stroke-opacity=".28"/><g transform="translate(14 19) scale(0.5417)" opacity="1.0" fill="#F43F5E" ><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></g><text x="42" y="27" font-family="'Inter','SF Pro Display','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="600" fill="#EAF2FF" letter-spacing="0.1" text-anchor="start" opacity="1" class="" style="">Pinterest</text><text x="42" y="40" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',monospace" font-size="7" font-weight="500" fill="#61738F" letter-spacing="0.3" text-anchor="start" opacity="1" class="" style="">pin.it/19sbrqNYb</text></svg>
+@keyframes breath{0%,100%{opacity:.42}50%{opacity:.82}}
+@keyframes aur{from{transform:translate(-1.2%,-.9%) scale(1)}to{transform:translate(1.2%,1%) scale(1.035)}}
+@keyframes halo{0%,100%{opacity:.10;transform:scale(1)}50%{opacity:.20;transform:scale(1.06)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes glowP{0%,100%{opacity:.34}50%{opacity:.60}}
+@keyframes shine{0%{opacity:.22}45%{opacity:.85}100%{opacity:.22}}
+@keyframes tilt{0%,100%{transform:rotate(-4.4deg)}50%{transform:rotate(-3.5deg)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes pop{from{opacity:0;transform:translateY(4px) scale(.72)}to{opacity:1;transform:none}}
+@keyframes rv{from{opacity:0;transform:translateY(11px)}to{opacity:1;transform:translateY(0)}}
+@keyframes rvS{from{opacity:0;transform:translateY(7px) scale(.994)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .fl-a,.fl-b,.fl-c,.orbit,.orbit-rev,.dotpulse,.mq,.mq-rev,.breath,
+  .aur,.halo,.bob,.glowp,.shine,.tilt,.grow,.pop{animation:none!important}
+  .rot{animation:none!important;opacity:0!important}
+  .rot0{opacity:1!important}
+  .rv,.rv-s,.pop{opacity:1!important;transform:none!important}
+  .grow{transform:none!important}
+}
+</style><rect width="144" height="52" rx="14" fill="url(#socBg)"/><circle cx="128" cy="6" r="38" fill="url(#socGlow)"/><circle cx="21" cy="26" r="16" fill="#F43F5E" class="halo" style="animation-delay:2.70s"/><rect x=".5" y=".5" width="143" height="51" rx="14" fill="none" stroke="url(#rim)" stroke-width="1"/><path d="M 14 1.5 H 130" stroke="url(#topLine)" stroke-width="1" opacity=".5"/><rect x="8" y="13" width="26" height="26" rx="8" fill="#F43F5E" fill-opacity=".10" stroke="#F43F5E" stroke-opacity=".28"/><g transform="translate(14 19) scale(0.5417)" opacity="1.0" fill="#F43F5E" ><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></g><text x="42" y="27" font-family="'Inter','SF Pro Display','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="600" fill="#EAF2FF" letter-spacing="0.1" text-anchor="start" opacity="1" class="" style="">Pinterest</text><text x="42" y="40" font-family="'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',monospace" font-size="7" font-weight="500" fill="#61738F" letter-spacing="0.3" text-anchor="start" opacity="1" class="" style="">pin.it/19sbrqNYb</text><g clip-path="url(#socClip)" opacity=".45"><rect x="-70" y="-6" width="68" height="64" fill="url(#sheen)"><animate attributeName="x" values="-70;144;-70" dur="8s" begin="3.30s" repeatCount="indefinite"/></rect></g></svg>

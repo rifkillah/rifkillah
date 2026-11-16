@@ -152,7 +152,7 @@ def build_desktop(data: dict) -> str:
         (1090, 470, 420, "#7C3AED", .30, "fl-b"),
         (700, 520, 360, "#0891B2", .18, "fl-c"),
     ])
-    d.add(d.panel(0, 0, 1200, 470, 34, sweep=True))
+    d.add(d.rv(d.panel(0, 0, 1200, 470, 34, sweep=True), .02, "rv-s"))
 
     days = data["contributions"]["days"]
     total = data["contributions"]["total"]
@@ -160,13 +160,15 @@ def build_desktop(data: dict) -> str:
     langs = data["languages"]
 
     # ── masthead ──────────────────────────────────────────────────────────
-    d.add(txt(56, 46, "GITHUB SIGNAL", size=11, fill=CYAN, weight=700, ls=4.2, family=MONO))
-    d.add(txt(56, 66, "Ritme kerja, bukan angka kosong.", size=15, fill=MUTED))
+    d.add(d.rv(txt(56, 46, "GITHUB SIGNAL", size=11, fill=CYAN, weight=700, ls=4.2, family=MONO), .06))
+    d.add(d.rv(txt(56, 66, "Ritme kerja, bukan angka kosong.", size=15, fill=MUTED), .11))
     stamp = data["generated"].replace("T", " ").replace("Z", " UTC")
-    d.add(txt(1144, 46, "LAST 12 MONTHS", size=9, fill=DIM, weight=600, ls=2.4,
-              anchor="end", family=MONO))
-    d.add(txt(1144, 64, f"synced {stamp}", size=9, fill=DIM, weight=500,
-              anchor="end", family=MONO))
+    d.add(d.rv(
+        txt(1144, 46, "LAST 12 MONTHS", size=9, fill=DIM, weight=600, ls=2.4,
+            anchor="end", family=MONO) +
+        txt(1144, 64, f"synced {stamp}", size=9, fill=DIM, weight=500,
+            anchor="end", family=MONO),
+        .08))
 
     # ── stat strip ────────────────────────────────────────────────────────
     stats = [
@@ -177,26 +179,32 @@ def build_desktop(data: dict) -> str:
     ]
     for i, (value, label, color) in enumerate(stats):
         x = 56 + i * 278
-        d.add(f'<circle cx="{x + 3:g}" cy="106" r="3" fill="{color}" class="dotpulse"/>')
-        d.add(txt(x, 148, value, size=38, weight=800, fill=INK, ls=-1))
-        d.add(txt(x, 168, label, size=9.5, fill=DIM, weight=600, ls=2.2))
-        if i:
-            d.add(f'<line x1="{x - 40:g}" y1="104" x2="{x - 40:g}" y2="170" stroke="#FFFFFF" stroke-opacity=".10"/>')
+        d.add(d.rv(
+            f'<circle cx="{x + 3:g}" cy="106" r="3" fill="{color}" class="dotpulse"/>' +
+            txt(x, 148, value, size=38, weight=800, fill=INK, ls=-1) +
+            txt(x, 168, label, size=9.5, fill=DIM, weight=600, ls=2.2) +
+            (f'<line x1="{x - 40:g}" y1="104" x2="{x - 40:g}" y2="170" stroke="#FFFFFF" '
+             f'stroke-opacity=".10"/>' if i else ""),
+            .16 + i * .07))
 
-    d.add(txt(1144, 148, f"longest streak {longest}d", size=10, fill=DIM,
-              anchor="end", family=MONO))
-    d.add(txt(1144, 168, f"member since {data['user']['created']}", size=10, fill=DIM,
-              anchor="end", family=MONO))
+    d.add(d.rv(
+        txt(1144, 148, f"longest streak {longest}d", size=10, fill=DIM,
+            anchor="end", family=MONO) +
+        txt(1144, 168, f"member since {data['user']['created']}", size=10, fill=DIM,
+            anchor="end", family=MONO),
+        .30))
 
     # ── contribution heatmap ──────────────────────────────────────────────
     left, top, step, cell = 56, 236, 12, 9
-    d.add(txt(left, 202, "CONTRIBUTION MAP", size=10, fill=MUTED, weight=700, ls=2.6, family=MONO))
+    d.add(d.rv(txt(left, 202, "CONTRIBUTION MAP", size=10, fill=MUTED, weight=700, ls=2.6, family=MONO), .20))
 
     # pad the first week so Sunday starts on the top row
     pad = (datetime.strptime(days[0]["date"], "%Y-%m-%d").weekday() + 1) % 7
     cells = [None] * pad + days
 
+    # each week fades in a beat after the previous one: a slow left-to-right wave
     for col in range((len(cells) + 6) // 7):
+        parts = []
         for row in range(7):
             idx = col * 7 + row
             if idx >= len(cells) or cells[idx] is None:
@@ -205,11 +213,13 @@ def build_desktop(data: dict) -> str:
             color = LEVELS[min(int(day["level"]), 4)]
             x = left + col * step
             y = top + row * step
-            d.add(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2.4" fill="{color}" opacity="{'.07' if day['count'] == 0 else '1'}"/>')
+            parts.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2.4" fill="{color}" opacity="{".07" if day["count"] == 0 else "1"}"/>')
             if day["count"] >= 10:
-                d.add(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2.4" fill="none" stroke="{MINT}" stroke-opacity=".5" stroke-width=".8"/>')
+                parts.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2.4" fill="none" stroke="{MINT}" stroke-opacity=".5" stroke-width=".8"/>')
+        d.add(f'<g class="pop" style="animation-delay:{.24 + col * .014:.3f}s">{"".join(parts)}</g>')
 
     # month labels
+    months = []
     last_month = None
     for idx, day in enumerate(cells):
         if day is None:
@@ -218,20 +228,23 @@ def build_desktop(data: dict) -> str:
         if dt.month != last_month:
             last_month = dt.month
             x = left + (idx // 7) * step
-            d.add(txt(x, 228, dt.strftime("%b").upper(), size=7, fill=DIM, weight=600, ls=.6, family=MONO))
+            months.append(txt(x, 228, dt.strftime("%b").upper(), size=7, fill=DIM, weight=600, ls=.6, family=MONO))
+    d.add(d.rv("".join(months), .30))
 
     # legend
-    lx = left
-    d.add(txt(lx, 336, "LESS", size=8, fill=DIM, weight=600, ls=1.2, family=MONO))
-    lx += 34
+    legend = [txt(left, 336, "LESS", size=8, fill=DIM, weight=600, ls=1.2, family=MONO)]
+    lx = left + 34
     for i, color in enumerate(LEVELS):
         extra = ' stroke="#FFFFFF" stroke-opacity=".18"' if i == 0 else ""
         op = ".10" if i == 0 else "1"
-        d.add(f'<rect x="{lx}" y="327" width="9" height="9" rx="2.4" fill="{color}" opacity="{op}"{extra}/>')
+        legend.append(f'<rect x="{lx}" y="327" width="9" height="9" rx="2.4" fill="{color}" opacity="{op}"{extra}/>')
         lx += 13
-    d.add(txt(lx + 4, 336, "MORE", size=8, fill=DIM, weight=600, ls=1.2, family=MONO))
-    d.add(txt(left, 366, "Setiap kotak adalah satu hari. Garis mint menandai hari dengan 10+ kontribusi.", size=10, fill=DIM))
-    d.add(txt(left, 386, f"{total} kontribusi dalam 12 bulan terakhir · streak terpanjang {longest} hari.", size=10, fill=DIM))
+    legend.append(txt(lx + 4, 336, "MORE", size=8, fill=DIM, weight=600, ls=1.2, family=MONO))
+    d.add(d.rv("".join(legend), .62))
+    d.add(d.rv(
+        txt(left, 366, "Setiap kotak adalah satu hari. Garis mint menandai hari dengan 10+ kontribusi.", size=10, fill=DIM) +
+        txt(left, 386, f"{total} kontribusi dalam 12 bulan terakhir · streak terpanjang {longest} hari.", size=10, fill=DIM),
+        .70))
 
     # ── language bars ─────────────────────────────────────────────────────
     d.d("""
@@ -241,23 +254,30 @@ def build_desktop(data: dict) -> str:
   <stop offset="1" stop-color="#6EE7B7"/>
 </linearGradient>""")
     bx, bw = 720, 424
-    d.add(txt(bx, 202, "MOST WRITTEN", size=10, fill=MUTED, weight=700, ls=2.6, family=MONO))
+    d.add(d.rv(txt(bx, 202, "MOST WRITTEN", size=10, fill=MUTED, weight=700, ls=2.6, family=MONO), .26))
 
     for i, lang in enumerate(langs):
         y = 240 + i * 34
-        d.add(txt(bx, y - 6, lang["name"], size=12, fill="#DCE8F8", weight=600))
-        d.add(txt(bx + bw, y - 6, f"{lang['pct']:.0f}%", size=11, fill=MUTED,
-                  anchor="end", family=MONO))
-        d.add(f'<rect x="{bx}" y="{y}" width="{bw}" height="5" rx="2.5" fill="#FFFFFF" fill-opacity=".07"/>')
-        d.add(f'<rect x="{bx}" y="{y}" width="{max(4, bw * lang["pct"] / 100):.1f}" height="5" rx="2.5" fill="url(#barGrad)"/>')
+        d.add(d.rv(
+            txt(bx, y - 6, lang["name"], size=12, fill="#DCE8F8", weight=600) +
+            txt(bx + bw, y - 6, f"{lang['pct']:.0f}%", size=11, fill=MUTED,
+                anchor="end", family=MONO),
+            .34 + i * .07))
+        d.add(d.rv(f'<rect x="{bx}" y="{y}" width="{bw}" height="5" rx="2.5" fill="#FFFFFF" fill-opacity=".07"/>',
+                   .38 + i * .07))
+        # the bar itself grows out of its baseline, one language after another
+        d.add(f'<rect x="{bx}" y="{y}" width="{max(4, bw * lang["pct"] / 100):.1f}" height="5" rx="2.5" '
+              f'fill="url(#barGrad)" class="grow" style="animation-delay:{.42 + i * .08:.2f}s"/>')
 
-    d.add(txt(bx, 430, "Blade digabung ke PHP · JavaScript & Dockerfile <1% · publik saja", size=9.5, fill=DIM))
+    d.add(d.rv(txt(bx, 430, "Blade digabung ke PHP · JavaScript & Dockerfile <1% · publik saja", size=9.5, fill=DIM), .78))
 
     # ── footer ────────────────────────────────────────────────────────────
-    d.add('<line x1="56" y1="440" x2="1144" y2="440" stroke="#FFFFFF" stroke-opacity=".08"/>')
-    d.add(txt(56, 456, "source  GitHub REST API + contribution calendar", size=8.5, fill=DIM, family=MONO))
-    d.add(txt(1144, 456, "auto-refresh  tools/build_stats.py", size=8.5, fill=DIM,
-              anchor="end", family=MONO))
+    d.add(d.rv(
+        '<line x1="56" y1="440" x2="1144" y2="440" stroke="#FFFFFF" stroke-opacity=".08"/>' +
+        txt(56, 456, "source  GitHub REST API + contribution calendar", size=8.5, fill=DIM, family=MONO) +
+        txt(1144, 456, "auto-refresh  tools/build_stats.py", size=8.5, fill=DIM,
+            anchor="end", family=MONO),
+        .84))
 
     return d.render()
 
@@ -271,7 +291,7 @@ def build_mobile(data: dict) -> str:
         (450, 470, 300, "#7C3AED", .30, "fl-b"),
         (240, 800, 280, "#0891B2", .16, "fl-c"),
     ])
-    d.add(d.panel(0, 0, W, H, 30, sweep=True))
+    d.add(d.rv(d.panel(0, 0, W, H, 30, sweep=True), .02, "rv-s"))
 
     days = data["contributions"]["days"]
     total = data["contributions"]["total"]
@@ -281,12 +301,14 @@ def build_mobile(data: dict) -> str:
 
     # ── masthead ──────────────────────────────────────────────────────────
     stamp = data["generated"].replace("T", " ").replace("Z", " UTC")
-    d.add(txt(pad, 44, "GITHUB SIGNAL", size=10, fill=CYAN, weight=700, ls=3.2, family=MONO))
-    d.add(txt(W - pad, 40, "LAST 12 MONTHS", size=8.5, fill=DIM, weight=600, ls=1.8,
-              anchor="end", family=MONO))
-    d.add(txt(W - pad, 54, f"synced {stamp}", size=8.5, fill=DIM, weight=500,
-              anchor="end", family=MONO))
-    d.add(txt(pad, 68, "Ritme kerja, bukan angka kosong.", size=14, fill=MUTED))
+    d.add(d.rv(txt(pad, 44, "GITHUB SIGNAL", size=10, fill=CYAN, weight=700, ls=3.2, family=MONO), .06))
+    d.add(d.rv(
+        txt(W - pad, 40, "LAST 12 MONTHS", size=8.5, fill=DIM, weight=600, ls=1.8,
+            anchor="end", family=MONO) +
+        txt(W - pad, 54, f"synced {stamp}", size=8.5, fill=DIM, weight=500,
+            anchor="end", family=MONO),
+        .09))
+    d.add(d.rv(txt(pad, 68, "Ritme kerja, bukan angka kosong.", size=14, fill=MUTED), .14))
 
     # ── stat cards 2×2 ────────────────────────────────────────────────────
     stats = [
@@ -299,22 +321,27 @@ def build_mobile(data: dict) -> str:
     for i, (value, label, color) in enumerate(stats):
         x = pad + (i % 2) * (cw + gap)
         y = 92 + (i // 2) * (ch + gap)
-        d.add(d.panel(x, y, cw, ch, 16))
-        d.add(f'<circle cx="{x + 16:g}" cy="{y + 17:g}" r="2.8" fill="{color}" class="dotpulse"/>')
-        d.add(txt(x + 16, y + 50, value, size=30, weight=800, fill=INK, ls=-.8))
-        d.add(txt(x + 16, y + 64, label, size=8, fill=DIM, weight=600, ls=1.6))
-    d.add(txt(pad, 266, "longest streak", size=8.5, fill=DIM, family=MONO))
-    d.add(txt(pad + 84, 266, f"{longest} days", size=8.5, fill=BLUE, weight=600, family=MONO))
-    d.add(txt(W - pad, 266, f"member since {data['user']['created']}", size=8.5, fill=DIM,
-              anchor="end", family=MONO))
+        d.add(d.rv(
+            d.panel(x, y, cw, ch, 16) +
+            f'<circle cx="{x + 16:g}" cy="{y + 17:g}" r="2.8" fill="{color}" class="dotpulse"/>' +
+            txt(x + 16, y + 50, value, size=30, weight=800, fill=INK, ls=-.8) +
+            txt(x + 16, y + 64, label, size=8, fill=DIM, weight=600, ls=1.6),
+            .18 + i * .08, "rv-s"))
+    d.add(d.rv(
+        txt(pad, 266, "longest streak", size=8.5, fill=DIM, family=MONO) +
+        txt(pad + 84, 266, f"{longest} days", size=8.5, fill=BLUE, weight=600, family=MONO) +
+        txt(W - pad, 266, f"member since {data['user']['created']}", size=8.5, fill=DIM,
+            anchor="end", family=MONO),
+        .50))
 
     # ── contribution heatmap ──────────────────────────────────────────────
     left, top, step, cell = pad, 322, 7.5, 5.6
-    d.add(txt(left, 292, "CONTRIBUTION MAP", size=9.5, fill=MUTED, weight=700, ls=2.2, family=MONO))
+    d.add(d.rv(txt(left, 292, "CONTRIBUTION MAP", size=9.5, fill=MUTED, weight=700, ls=2.2, family=MONO), .56))
 
     first = (datetime.strptime(days[0]["date"], "%Y-%m-%d").weekday() + 1) % 7
     cells = [None] * first + days
 
+    months = []
     last_month = None
     for idx, day in enumerate(cells):
         if day is None:
@@ -322,10 +349,12 @@ def build_mobile(data: dict) -> str:
         dt = datetime.strptime(day["date"], "%Y-%m-%d")
         if dt.month != last_month:
             last_month = dt.month
-            d.add(txt(left + (idx // 7) * step, 312, dt.strftime("%b").upper(),
-                      size=6, fill=DIM, weight=600, ls=.4, family=MONO))
+            months.append(txt(left + (idx // 7) * step, 312, dt.strftime("%b").upper(),
+                              size=6, fill=DIM, weight=600, ls=.4, family=MONO))
+    d.add(d.rv("".join(months), .60))
 
     for col in range((len(cells) + 6) // 7):
+        parts = []
         for row in range(7):
             idx = col * 7 + row
             if idx >= len(cells) or cells[idx] is None:
@@ -334,27 +363,30 @@ def build_mobile(data: dict) -> str:
             color = LEVELS[min(int(day["level"]), 4)]
             x, y = left + col * step, top + row * step
             op = ".07" if day["count"] == 0 else "1"
-            d.add(f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell}" height="{cell}" rx="1.7" fill="{color}" opacity="{op}"/>')
+            parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell}" height="{cell}" rx="1.7" fill="{color}" opacity="{op}"/>')
             if day["count"] >= 10:
-                d.add(f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell}" height="{cell}" rx="1.7" fill="none" stroke="{MINT}" stroke-opacity=".6" stroke-width=".7"/>')
+                parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell}" height="{cell}" rx="1.7" fill="none" stroke="{MINT}" stroke-opacity=".6" stroke-width=".7"/>')
+        d.add(f'<g class="pop" style="animation-delay:{.46 + col * .013:.3f}s">{"".join(parts)}</g>')
 
     # legend
-    lx = left
-    d.add(txt(lx, 402, "LESS", size=7, fill=DIM, weight=600, ls=1, family=MONO))
-    lx += 28
+    legend = [txt(left, 402, "LESS", size=7, fill=DIM, weight=600, ls=1, family=MONO)]
+    lx = left + 28
     for i, color in enumerate(LEVELS):
         extra = ' stroke="#FFFFFF" stroke-opacity=".18"' if i == 0 else ""
         op = ".10" if i == 0 else "1"
-        d.add(f'<rect x="{lx}" y="394.5" width="7" height="7" rx="1.8" fill="{color}" opacity="{op}"{extra}/>')
+        legend.append(f'<rect x="{lx}" y="394.5" width="7" height="7" rx="1.8" fill="{color}" opacity="{op}"{extra}/>')
         lx += 10
-    d.add(txt(lx + 3, 402, "MORE", size=7, fill=DIM, weight=600, ls=1, family=MONO))
-    d.add(txt(left, 422, "Setiap kotak adalah satu hari.", size=8.5, fill=DIM))
-    d.add(txt(left, 436, "Garis mint menandai hari dengan 10+ kontribusi.", size=8.5, fill=DIM))
-    d.add(txt(left, 454, f"{total} kontribusi dalam 12 bulan terakhir.", size=8.5, fill=MUTED))
+    legend.append(txt(lx + 3, 402, "MORE", size=7, fill=DIM, weight=600, ls=1, family=MONO))
+    d.add(d.rv("".join(legend), 1.18))
+    d.add(d.rv(
+        txt(left, 422, "Setiap kotak adalah satu hari.", size=8.5, fill=DIM) +
+        txt(left, 436, "Garis mint menandai hari dengan 10+ kontribusi.", size=8.5, fill=DIM) +
+        txt(left, 454, f"{total} kontribusi dalam 12 bulan terakhir.", size=8.5, fill=MUTED),
+        1.26))
 
     # ── languages ─────────────────────────────────────────────────────────
-    d.add('<line x1="36" y1="476" x2="444" y2="476" stroke="#FFFFFF" stroke-opacity=".08"/>')
-    d.add(txt(left, 500, "MOST WRITTEN", size=9.5, fill=MUTED, weight=700, ls=2.2, family=MONO))
+    d.add(d.rv('<line x1="36" y1="476" x2="444" y2="476" stroke="#FFFFFF" stroke-opacity=".08"/>', 1.34))
+    d.add(d.rv(txt(left, 500, "MOST WRITTEN", size=9.5, fill=MUTED, weight=700, ls=2.2, family=MONO), 1.38))
     d.d("""
 <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
   <stop offset="0" stop-color="#6EA8FF"/>
@@ -364,19 +396,25 @@ def build_mobile(data: dict) -> str:
     bw = 408
     for i, lang in enumerate(langs):
         y = 524 + i * 35
-        d.add(txt(left, y, lang["name"], size=11.5, fill="#DCE8F8", weight=600))
-        d.add(txt(left + bw, y, f"{lang['pct']:.0f}%", size=10, fill=MUTED,
-                  anchor="end", family=MONO))
-        d.add(f'<rect x="{left}" y="{y + 8}" width="{bw}" height="5" rx="2.5" fill="#FFFFFF" fill-opacity=".07"/>')
-        d.add(f'<rect x="{left}" y="{y + 8}" width="{max(4, bw * lang["pct"] / 100):.1f}" height="5" rx="2.5" fill="url(#barGrad)"/>')
+        d.add(d.rv(
+            txt(left, y, lang["name"], size=11.5, fill="#DCE8F8", weight=600) +
+            txt(left + bw, y, f"{lang['pct']:.0f}%", size=10, fill=MUTED,
+                anchor="end", family=MONO),
+            1.46 + i * .07))
+        d.add(d.rv(f'<rect x="{left}" y="{y + 8}" width="{bw}" height="5" rx="2.5" fill="#FFFFFF" fill-opacity=".07"/>',
+                   1.50 + i * .07))
+        d.add(f'<rect x="{left}" y="{y + 8}" width="{max(4, bw * lang["pct"] / 100):.1f}" height="5" rx="2.5" '
+              f'fill="url(#barGrad)" class="grow" style="animation-delay:{1.54 + i * .08:.2f}s"/>')
 
-    d.add(txt(left, 728, "Blade digabung ke PHP · JavaScript & Dockerfile <1%", size=8.5, fill=DIM))
+    d.add(d.rv(txt(left, 728, "Blade digabung ke PHP · JavaScript & Dockerfile <1%", size=8.5, fill=DIM), 1.90))
 
     # ── footer ────────────────────────────────────────────────────────────
-    d.add('<line x1="36" y1="746" x2="444" y2="746" stroke="#FFFFFF" stroke-opacity=".08"/>')
-    d.add(txt(left, 764, "source  GitHub REST API + calendar", size=8, fill=DIM, family=MONO))
-    d.add(txt(W - pad, 764, "auto-refresh daily", size=8, fill=DIM,
-              anchor="end", family=MONO))
+    d.add(d.rv(
+        '<line x1="36" y1="746" x2="444" y2="746" stroke="#FFFFFF" stroke-opacity=".08"/>' +
+        txt(left, 764, "source  GitHub REST API + calendar", size=8, fill=DIM, family=MONO) +
+        txt(W - pad, 764, "auto-refresh daily", size=8, fill=DIM,
+            anchor="end", family=MONO),
+        1.96))
 
     return d.render()
 
