@@ -549,12 +549,13 @@ def build_section(slug, index, title, subtitle, accent, filename):
 
 def build_sections():
     build_section("about", "01", "About", "WHO I AM  ·  WHAT I DO  ·  WHERE I'M GOING", BLUE, "sec-about.svg")
-    build_section("journey", "02", "Journey", "FAN BLADES  →  RANGE CIRCUITS  →  LIQUID GLASS", VIOLET, "sec-journey.svg")
-    build_section("stack", "03", "Stack", "TOOLS I THINK WITH EVERY SINGLE DAY", CYAN, "sec-stack.svg")
-    build_section("work", "04", "Work", "SELECTED REPOSITORIES  ·  REAL SHIPPED CODE", MINT, "sec-work.svg")
-    build_section("lab", "05", "GitHub Lab", "SIGNALS  ·  STREAKS  ·  CONTRIBUTION WEATHER", ROSE, "sec-lab.svg")
-    build_section("beyond", "06", "Beyond Code", "THE HOBBIES THAT KEEP THE CURIOSITY ALIVE", AMBER, "sec-beyond.svg")
-    build_section("connect", "07", "Connect", "ONE MESSAGE AWAY  ·  COLLABORATION WELCOME", BLUE, "sec-connect.svg")
+    build_section("experience", "02", "Experience", "CONTENT  ·  SOCIAL  ·  WEB  ·  PUBLIC SERVICE", CYAN, "sec-experience.svg")
+    build_section("journey", "03", "Journey", "FAN BLADES  →  RANGE CIRCUITS  →  LIQUID GLASS", VIOLET, "sec-journey.svg")
+    build_section("stack", "04", "Stack", "TOOLS I THINK WITH EVERY SINGLE DAY", CYAN, "sec-stack.svg")
+    build_section("work", "05", "Work", "SELECTED REPOSITORIES  ·  REAL SHIPPED CODE", MINT, "sec-work.svg")
+    build_section("lab", "06", "GitHub Lab", "SIGNALS  ·  STREAKS  ·  CONTRIBUTION WEATHER", ROSE, "sec-lab.svg")
+    build_section("beyond", "07", "Beyond Code", "THE HOBBIES THAT KEEP THE CURIOSITY ALIVE", AMBER, "sec-beyond.svg")
+    build_section("connect", "08", "Connect", "ONE MESSAGE AWAY  ·  COLLABORATION WELCOME", BLUE, "sec-connect.svg")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -796,11 +797,11 @@ SOCIALS = [
 
 
 def build_socials():
-    """170×58 glass chip: five per row on desktop, two per row on a phone."""
+    """144×52 glass chip: five per row on desktop, two per row on a phone."""
     (A / "social").mkdir(parents=True, exist_ok=True)
-    W, H = 170, 58
+    W, H = 144, 52
     for slug, label, color, handle in SOCIALS:
-        d = Doc(W, H, f"soc-{slug}", radius=17)
+        d = Doc(W, H, f"soc-{slug}", radius=14)
         d.d(f"""
 <linearGradient id="socBg" x1="0" y1="0" x2="1" y2="1">
   <stop offset="0" stop-color="#101A2C" stop-opacity=".96"/>
@@ -811,18 +812,18 @@ def build_socials():
   <stop offset="0" stop-color="{color}" stop-opacity=".30"/>
   <stop offset="1" stop-color="{color}" stop-opacity="0"/>
 </radialGradient>""")
-        d.add(f'<rect width="{W}" height="{H}" rx="17" fill="url(#socBg)"/>')
-        d.add(f'<circle cx="{W - 18}" cy="6" r="46" fill="url(#socGlow)"/>')
-        d.add(f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="17" fill="none" stroke="url(#rim)" stroke-width="1"/>')
-        d.add(f'<path d="M 17 1.5 H {W - 17}" stroke="url(#topLine)" stroke-width="1" opacity=".5"/>')
+        d.add(f'<rect width="{W}" height="{H}" rx="14" fill="url(#socBg)"/>')
+        d.add(f'<circle cx="{W - 16}" cy="6" r="38" fill="url(#socGlow)"/>')
+        d.add(f'<rect x=".5" y=".5" width="{W - 1}" height="{H - 1}" rx="14" fill="none" stroke="url(#rim)" stroke-width="1"/>')
+        d.add(f'<path d="M 14 1.5 H {W - 14}" stroke="url(#topLine)" stroke-width="1" opacity=".5"/>')
         # icon plate
-        d.add(f'<rect x="10" y="13" width="32" height="32" rx="10" fill="{color}" fill-opacity=".10" stroke="{color}" stroke-opacity=".28"/>')
+        d.add(f'<rect x="8" y="13" width="26" height="26" rx="8" fill="{color}" fill-opacity=".10" stroke="{color}" stroke-opacity=".28"/>')
         if slug == "brainly":
-            d.add(txt(26, 36, "b", size=19, fill=color, weight=800, anchor="middle"))
+            d.add(txt(21, 33, "b", size=16, fill=color, weight=800, anchor="middle"))
         else:
-            d.add(icon(slug, 18, 21, 16, fill=color, folder="brands"))
-        d.add(txt(50, 30, label, size=12.5, fill="#EAF2FF", weight=600, ls=.1))
-        d.add(txt(50, 44, handle, size=8, fill=DIM, weight=500, ls=.4, family=MONO))
+            d.add(icon(slug, 14, 19, 13, fill=color, folder="brands"))
+        d.add(txt(42, 27, label, size=12, fill="#EAF2FF", weight=600, ls=.1))
+        d.add(txt(42, 40, handle, size=7, fill=DIM, weight=500, ls=.3, family=MONO))
         d.save(f"social/{slug}.svg")
 
 

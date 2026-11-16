@@ -17,7 +17,7 @@ Kalau repo `rifkillah/rifkillah` belum ada: buat repo **Public** dengan nama `ri
 ## 2 · Struktur paket
 
 ```text
-github-profile/
+rifkillah/                      ← isi repo, langsung di root
 ├── README.md                 ← profil utama (timpa README lama)
 ├── INSTALL.md                ← file ini
 ├── preview.html              ← buka di browser untuk melihat semua aset
@@ -26,6 +26,7 @@ github-profile/
 │   ├── hero-mobile.svg       ← banner iPhone / layar sempit
 │   ├── marquee.svg           ← rail kata berjalan
 │   ├── sec-about.svg         ← header bagian About
+│   ├── sec-experience.svg    ← header bagian Experience
 │   ├── sec-journey.svg       ← header bagian Journey
 │   ├── sec-stack.svg         ← header bagian Stack
 │   ├── sec-work.svg          ← header bagian Work
@@ -39,10 +40,11 @@ github-profile/
 │   ├── github-stats-mobile.svg ← varian iPhone
 │   ├── github-stats.json     ← cache angka terakhir
 │   ├── footer.svg            ← penutup
-│   ├── social/*.svg          ← 10 badge kontak
+│   ├── social/*.svg          ← 10 badge kontak (144 × 52)
 │   └── src/                  ← foto & ikon sumber (untuk rebuild)
 ├── .github/workflows/
-│   └── profile-stats.yml     ← refresh kartu statistik tiap hari
+│   ├── profile-stats.yml     ← refresh kartu statistik tiap hari
+│   └── snake.yml             ← regenerate ular kontribusi ke branch `output`
 └── tools/
     ├── build_assets.py       ← generator semua SVG
     └── build_stats.py        ← pengambil data GitHub + kartu statistik
@@ -58,7 +60,7 @@ github-profile/
 
 1. Buka `https://github.com/rifkillah/rifkillah`.
 2. Klik **Add file → Upload files**.
-3. Drag semua isi folder `github-profile/` (README.md, assets/, tools/, preview.html).
+3. Drag semua isi folder paket ini (README.md, INSTALL.md, assets/, tools/, preview.html) ke root repo — **jangan** ditaruh di dalam subfolder, GitHub hanya membaca `README.md` di root.
 4. Commit message: `feat: liquid glass profile`.
 5. Buka halaman profil `https://github.com/rifkillah` — README langsung tampil.
 
@@ -86,14 +88,24 @@ git push origin main
 
 - [ ] Banner tampil di desktop **dan** versi mobile berganti otomatis (lebar ≤ 640px).
 - [ ] Animasi berjalan: cincin avatar, chip mengambang, marquee, rail ikon, sheen kartu.
-- [ ] Semua badge sosial mengarah ke akun yang benar.
+- [ ] Sepuluh badge sosial tersusun **5 + 5** di desktop dan **2 × 5** di HP, semuanya mengarah ke akun yang benar.
 - [ ] Kartu **GitHub Signal** tampil dan angkanya masuk akal.
+- [ ] Ular kontribusi tampil di bawah kartu statistik (butuh branch `output`; jalankan workflow **Generate Snake** sekali kalau belum ada).
 
 Kartu statistik sudah ikut di dalam paket (`assets/github-stats.svg`), jadi tidak bergantung pada layanan pihak ketiga. Untuk memperbarui angkanya otomatis:
 
 1. Buka tab **Actions** → **Refresh GitHub signal** → **Run workflow**.
 2. Workflow memakai `GITHUB_TOKEN` bawaan repo (tidak perlu bikin token manual) dan melakukan commit otomatis setiap hari pukul 03:17 UTC.
 3. Kalau ingin memperbarui secara lokal: `python tools/build_stats.py` (butuh koneksi) atau `python tools/build_stats.py --offline` (pakai cache).
+
+**Ular kontribusi.** README memuat SVG dari branch `output`:
+
+```text
+https://raw.githubusercontent.com/rifkillah/rifkillah/output/github-contribution-grid-snake.svg
+https://raw.githubusercontent.com/rifkillah/rifkillah/output/github-contribution-grid-snake-dark.svg
+```
+
+Workflow `.github/workflows/snake.yml` menggambar ulang keduanya setiap 12 jam dan setiap kali ada push ke `main`, lalu mendorongnya ke branch `output` (tidak ada file biner di `main`). Kalau gambarnya belum muncul: tab **Actions** → **Generate Snake** → **Run workflow**, tunggu ±1 menit, lalu refresh halaman profil.
 
 Kalau ada gambar yang tidak muncul:
 
@@ -166,6 +178,7 @@ Edit blok **CONNECT** di `README.md`. Label dan handle di badge diatur di `tools
 
 - Bahasa visual **Liquid Glass** terinspirasi dari [zakisheriff/Liquid-Glass](https://github.com/zakisheriff/Liquid-Glass) (MIT). Di sini diimplementasikan ulang dengan SVG murni, bukan memakai paket React-nya.
 - Ikon teknologi & brand: [Simple Icons](https://simpleicons.org/) (CC0 1.0).
+- Ular kontribusi: [platane/snk](https://github.com/Platane/snk) + [crazy-max/ghaction-github-pages](https://github.com/crazy-max/ghaction-github-pages), dijalankan lewat GitHub Actions ke branch `output`.
 - Kartu statistik: dibuat sendiri dengan Python + SVG, memakai [GitHub REST API](https://docs.github.com/rest) dan [github-contributions-api](https://github.com/grubersjewish/github-contributions-api) untuk kalender kontribusi.
 
 ---

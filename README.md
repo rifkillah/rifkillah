@@ -43,11 +43,12 @@ Sekarang aku menempuh **S1 Teknik Informatika di Universitas Pamulang (2023)** d
 name        : Rifkillah Muliya Al-Faris
 alias       : [Rifki, rfklh, RfklhFaris]
 based_in    : Tangerang, Banten, Indonesia  ·  UTC+7
-education   : S1 Teknik Informatika — Universitas Pamulang, 2023–now
+education   : S1 Teknik Informatika — Universitas Pamulang, 2023–2027 · IPK 3.45
 
 focus       : [UI/UX Design, Android Internals, Web Systems, Multimedia]
 toolbox     : [Figma, Kotlin, Laravel, Python, Adobe CC, Git, Linux]
 currently   :
+  role      : Web Content Writer — Universitas Pamulang
   building  : Matfess — Liquid Glass study companion for Android
   learning  : Kotlin, Laravel, design systems, AI fundamentals
   open_to   : internship · freelance · meaningful collaboration
@@ -81,7 +82,35 @@ Magang, proyek freelance UI/UX atau web, dan kolaborasi multimedia yang menarik.
 </table>
 
 <!-- ══════════════════════════════════════════════════════════════════════
-     02 · JOURNEY
+     02 · EXPERIENCE
+     ══════════════════════════════════════════════════════════════════════ -->
+
+<img src="assets/sec-experience.svg" width="100%" alt="Experience">
+
+Tiga peran profesional dan satu proyek pengabdian — semuanya berakhir dengan satu pelajaran yang sama: **konten yang baik lahir dari verifikasi, bukan dari asumsi.**
+
+| Peran | Organisasi | Periode | Yang aku kerjakan |
+| --- | --- | --- | --- |
+| **Web Content Writer** | Universitas Pamulang | Okt 2025 – Jan 2026 | Menulis dan menerbitkan artikel pra/pasca-acara di situs resmi kampus, mengelola alur editorial dan verifikasi, merevisi naskah sampai disetujui Dekan fakultas. |
+| **Social Media Specialist & Content Creator** | FMIPA & FILKOM, Universitas Pamulang | Agu – Okt 2025 | Mengelola Instagram dan TikTok resmi dua fakultas: menjawab DM mahasiswa, memverifikasi informasi ke pihak fakultas, menyusun rencana konten, caption, hashtag, dan audio. |
+| **Intern Administrasi (Bagian Umum)** | Kementerian Hukum dan HAM RI — Jakarta Selatan | Mei – Agu 2022 | Koordinasi dokumen, verifikasi dan pelaporan data berbasis web, serta administrasi harian di lingkungan instansi pemerintah. |
+| **Tim Pengabdian Kepada Masyarakat (PKM)** | MA Al-Hasaniyah · Teknik Informatika UNPAM | Nov 2025 | Bersama sepuluh mahasiswa merancang sistem informasi absensi kelas berbasis web untuk menggantikan pencatatan manual. |
+
+**🎓 Pendidikan**
+
+| Institusi | Jurusan | Tahun | Nilai |
+| --- | --- | --- | --- |
+| **Universitas Pamulang** | S1 Teknik Informatika | 2023 – 2027 | IPK **3.45** |
+| **SMKS An-Nurmaniyah Ciledug** | Multimedia / Digital Communication | 2020 – 2023 | **82,25** |
+| **SMPS Fatahillah Ciledug** | — | 2017 – 2020 | **78,78** |
+
+**📄 Publikasi**
+
+> **Klasterisasi Berdasarkan Data Penduduk Miskin di Asia dan Wilayah Indonesia Menggunakan Metode K-Means**
+> PESHUM: Jurnal Pendidikan, Sosial dan Humaniora · Vol. 4 No. 6, Oktober 2025 · DOI [10.56799/peshum.v4i6.10581](https://doi.org/10.56799/peshum.v4i6.10581)
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     03 · JOURNEY
      ══════════════════════════════════════════════════════════════════════ -->
 
 <img src="assets/sec-journey.svg" width="100%" alt="Journey">
@@ -133,6 +162,8 @@ Berkebun mengajarku sabar; fotografi mengajarku melihat. Dua hal yang ternyata s
 
 Di SMK aku benar-benar tenggelam di dunia multimedia: **Photoshop, Premiere Pro, After Effects, Illustrator** — edit foto, animasi, video, desain grafis. Aku juga ikut membuat film pendek dan pernah menjadi aktor untuk tugas sekolah.
 
+Sebelumnya aku **tidak lolos zonasi SMA negeri**, jadi SMK Multimedia adalah pilihan kedua yang ternyata justru paling tepat: di sini hobi dan pelajaran akhirnya jadi satu.
+
 Tugas kuliah dan tugas sekolah kukerjakan tepat waktu. Nilai membaik bukan karena mendadak pintar, tapi karena aku mulai punya sistem: catat, kerjakan, selesaikan.
 
 > **Pelajaran:** hobi bisa menjadi identitas profesional kalau disiplinnya ikut dibawa.
@@ -168,7 +199,7 @@ Dari semua itu, aku membangun **Matfess**: aplikasi Android untuk mahasiswa, den
 </details>
 
 <!-- ══════════════════════════════════════════════════════════════════════
-     03 · STACK
+     04 · STACK
      ══════════════════════════════════════════════════════════════════════ -->
 
 <img src="assets/sec-stack.svg" width="100%" alt="Stack">
@@ -185,10 +216,11 @@ Aku tidak mengklaim menguasai semuanya. Ini alat yang pernah kupakai untuk menye
 | **Back-end & data** | `PHP` `Laravel` `Node.js` `Python` `MySQL` `REST API` |
 | **Mobile & system** | `Kotlin` `Android SDK` `SQLite` `Retrofit` `ADB` `fastboot` `Magisk` |
 | **Design & multimedia** | `Figma` `Photoshop` `Premiere Pro` `After Effects` `Illustrator` |
+| **Content & social** | `Instagram` `TikTok` `Canva` `CapCut` `Meta Business Suite` `analytics` |
 | **Daily drivers** | `VS Code` `Android Studio` `Git` `GitHub` `Linux` `Docker` |
 
 <!-- ══════════════════════════════════════════════════════════════════════
-     04 · WORK
+     05 · WORK
      ══════════════════════════════════════════════════════════════════════ -->
 
 <img src="assets/sec-work.svg" width="100%" alt="Selected work">
@@ -208,6 +240,10 @@ Aku tidak mengklaim menguasai semuanya. Ini alat yang pernah kupakai untuk menye
 | **[katalog-buku-e-perpustakaan](https://github.com/rifkillah/katalog-buku-e-perpustakaan)** | Katalog buku e-perpustakaan kampus dengan pencarian dan manajemen data. | `Laravel` `Blade` `MySQL` |
 | **[restful-api-data-mahasiswa](https://github.com/rifkillah/restful-api-data-mahasiswa)** | RESTful API data mahasiswa + portal web sebagai konsumen API. | `Laravel` `REST` |
 | **[sistem-portal-akademik-multi-role](https://github.com/rifkillah/sistem-portal-akademik-multi-role)** | Portal akademik dengan hak akses berbeda untuk tiap peran. | `Laravel` `Blade` |
+| **[portal-e-perpustakaan-autentikasi-hak-akses](https://github.com/rifkillah/portal-e-perpustakaan-autentikasi-hak-akses)** | Autentikasi dan hak akses portal e-perpustakaan kampus: login, peran, dan proteksi halaman. | `Laravel` `Blade` |
+| **[sistem-informasi-direktori-inventaris-lab-komputer](https://github.com/rifkillah/sistem-informasi-direktori-inventaris-lab-komputer)** | Direktori dan inventaris laboratorium komputer kampus, dari data ruang sampai pencatatan aset. | `Laravel` `Blade` |
+| **[prototipe-sistem-informasi-klinik-kesehatan-kampus](https://github.com/rifkillah/prototipe-sistem-informasi-klinik-kesehatan-kampus)** | Prototipe sistem informasi klinik kesehatan kampus untuk pendaftaran dan rekam kunjungan. | `Laravel` `PHP` |
+| **[Aplikasi-kategori-Manajemen-Bisnis-Keuangan-berbasis](https://github.com/rifkillah/Aplikasi-kategori-Manajemen-Bisnis-Keuangan-berbasis)** | Aplikasi manajemen bisnis dan keuangan berbasis kategori untuk pencatatan transaksi. | `Laravel` `Blade` |
 | **[Toko-Berkah-jaya](https://github.com/rifkillah/Toko-Berkah-jaya)** | Kasir desktop Java Swing bertema glassmorphism, MySQL, dan transaksi manual commit. | `Java` `Swing` `MySQL` |
 | **[Data-mining](https://github.com/rifkillah/Data-mining)** | Eksperimen pengolahan, pembersihan, dan analisis data. | `Python` |
 | **[Website](https://github.com/rifkillah/Website)** | Eksplorasi ulang antarmuka web untuk tugas kuliah. | `HTML` `CSS` |
@@ -219,7 +255,7 @@ Aku tidak mengklaim menguasai semuanya. Ini alat yang pernah kupakai untuk menye
 </div>
 
 <!-- ══════════════════════════════════════════════════════════════════════
-     05 · GITHUB LAB
+     06 · GITHUB LAB
      ══════════════════════════════════════════════════════════════════════ -->
 
 <img src="assets/sec-lab.svg" width="100%" alt="GitHub lab">
@@ -237,8 +273,24 @@ Angka bukan tujuan, tapi berguna untuk melihat ritme. Yang paling menarik justru
 
 <sub>Kartu di atas dirender ulang otomatis setiap hari oleh GitHub Actions — angkanya diambil langsung dari API GitHub, bukan dari layanan pihak ketiga.</sub>
 
+<br/><br/>
+
+**🐍 Ular kontribusi**
+
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/rifkillah/rifkillah/output/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/rifkillah/rifkillah/output/github-contribution-grid-snake.svg">
+  <img src="https://raw.githubusercontent.com/rifkillah/rifkillah/output/github-contribution-grid-snake.svg" width="100%" alt="Ular kontribusi menelusuri kotak-kotak kontribusi GitHub rifkillah">
+</picture>
+
+</div>
+
+<sub>Digambar ulang tiap hari dari data kontribusi asli — ikut tema terang/gelap GitHub.</sub>
+
 <!-- ══════════════════════════════════════════════════════════════════════
-     06 · BEYOND CODE
+     07 · BEYOND CODE
      ══════════════════════════════════════════════════════════════════════ -->
 
 <img src="assets/sec-beyond.svg" width="100%" alt="Beyond code">
@@ -277,7 +329,7 @@ Di luar editor, ada empat hal yang membuat kepalaku tetap waras — dan ternyata
 </table>
 
 <!-- ══════════════════════════════════════════════════════════════════════
-     07 · CONNECT
+     08 · CONNECT
      ══════════════════════════════════════════════════════════════════════ -->
 
 <img src="assets/sec-connect.svg" width="100%" alt="Connect">
@@ -286,16 +338,16 @@ Aku terbuka untuk magang, proyek freelance, kolaborasi desain, atau sekadar disk
 
 <div align="center">
 
-<a href="https://www.instagram.com/rifklh.faris_"><img src="assets/social/instagram.svg" width="170" alt="Instagram"></a>
-<a href="https://www.linkedin.com/in/rifkillahmaf/"><img src="assets/social/linkedin.svg" width="170" alt="LinkedIn"></a>
-<a href="https://github.com/rifkillah"><img src="assets/social/github.svg" width="170" alt="GitHub"></a>
-<a href="https://www.tiktok.com/@rfklhhh_"><img src="assets/social/tiktok.svg" width="170" alt="TikTok"></a>
-<a href="https://x.com/Rfklh_Alfaris"><img src="assets/social/x.svg" width="170" alt="X / Twitter"></a>
-<a href="https://youtube.com/@rifkiiii_lahh"><img src="assets/social/youtube.svg" width="170" alt="YouTube"></a>
-<a href="https://pin.it/19sbrqNYb"><img src="assets/social/pinterest.svg" width="170" alt="Pinterest"></a>
-<a href="https://www.threads.net/@rifklh.faris_"><img src="assets/social/threads.svg" width="170" alt="Threads"></a>
-<a href="https://discord.gg/r2CYJydn"><img src="assets/social/discord.svg" width="170" alt="Discord"></a>
-<a href="https://brainly.co.id/app/profile/20537154/answers"><img src="assets/social/brainly.svg" width="170" alt="Brainly"></a>
+<a href="https://www.instagram.com/rifklh.faris_"><img src="assets/social/instagram.svg" width="144" alt="Instagram"></a>
+<a href="https://www.linkedin.com/in/rifkillahmaf/"><img src="assets/social/linkedin.svg" width="144" alt="LinkedIn"></a>
+<a href="https://github.com/rifkillah"><img src="assets/social/github.svg" width="144" alt="GitHub"></a>
+<a href="https://www.tiktok.com/@rfklhhh_"><img src="assets/social/tiktok.svg" width="144" alt="TikTok"></a>
+<a href="https://x.com/Rfklh_Alfaris"><img src="assets/social/x.svg" width="144" alt="X / Twitter"></a>
+<a href="https://youtube.com/@rifkiiii_lahh"><img src="assets/social/youtube.svg" width="144" alt="YouTube"></a>
+<a href="https://pin.it/19sbrqNYb"><img src="assets/social/pinterest.svg" width="144" alt="Pinterest"></a>
+<a href="https://www.threads.net/@rifklh.faris_"><img src="assets/social/threads.svg" width="144" alt="Threads"></a>
+<a href="https://discord.gg/r2CYJydn"><img src="assets/social/discord.svg" width="144" alt="Discord"></a>
+<a href="https://brainly.co.id/app/profile/20537154/answers"><img src="assets/social/brainly.svg" width="144" alt="Brainly"></a>
 
 <br/><br/>
 
